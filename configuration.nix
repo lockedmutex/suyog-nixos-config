@@ -1,8 +1,5 @@
 { config, pkgs, lib, inputs, unstable-pkgs, ... }:
 
-let
-  nur-pkgs = pkgs.nur; 
-in
 {
   imports =
     [
@@ -196,7 +193,7 @@ in
       iotas
       vesktop
       libreoffice
-      nur-pkgs.repos.Ev357.helium
+      pkgs.nur.repos.Ev357.helium
 
       # language servers for zed:
       unstable-pkgs.nixd

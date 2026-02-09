@@ -42,6 +42,8 @@ in
       rebuild = "sudo nixos-rebuild switch --flake /home/suyog/nixos-config";
       update = "sudo nix flake update --flake /home/suyog/nixos-config && sudo nixos-rebuild switch --flake /home/suyog/nixos-config";
       clean = "sudo nix-collect-garbage -d";
+      optimise = "sudo nix-store --optimise";
+      update-lock = "nix flake update --flake /home/suyog/nixos-config";
     };
     
     # Example: Oh My Zsh (optional)
