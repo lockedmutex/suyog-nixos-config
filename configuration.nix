@@ -209,7 +209,7 @@
       # language servers for zed:
       nixd
       nil
-      nixfmt-rfc-style
+      nixfmt
     ];
   };
 
