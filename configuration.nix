@@ -1,14 +1,23 @@
-{ config, pkgs, lib, inputs, unstable-pkgs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  unstable-pkgs,
+  ...
+}:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
   # Nix Config:
   nix.settings.auto-optimise-store = true;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   nix.gc = {
     automatic = true;
     dates = "weekly";
@@ -22,16 +31,16 @@
     enable = true;
     device = "nodev";
     efiSupport = true;
-    useOSProber = true; 
-    copyKernels = true; 
-    gfxmodeEfi = "1920x1080"; 
-    gfxpayloadEfi = "keep"; 
+    useOSProber = true;
+    copyKernels = true;
+    gfxmodeEfi = "1920x1080";
+    gfxpayloadEfi = "keep";
     configurationLimit = 20;
   };
 
   boot.loader.timeout = 0;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.kernelModules = [ "amdgpu" ]; 
+  boot.initrd.kernelModules = [ "amdgpu" ];
   boot.initrd.systemd.enable = true;
   systemd.services.systemd-udev-settle.enable = false;
 
@@ -49,7 +58,7 @@
   };
 
   # Boot Splash Screen & Silent Boot
-   boot.plymouth = {
+  boot.plymouth = {
     enable = true;
     # theme = "bgrt";
     theme = "catppuccin-mocha";
@@ -170,7 +179,10 @@
   users.users.suyog = {
     isNormalUser = true;
     description = "Suyog Tandel";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     packages = with pkgs; [
       gnome-builder
       gapless
@@ -254,8 +266,8 @@
   ];
 
   environment.gnome.excludePackages = with pkgs; [
-    epiphany      
-    geary          
+    epiphany
+    geary
   ];
 
   environment.sessionVariables = {
@@ -295,7 +307,7 @@
   services.fstrim.enable = true;
   security.apparmor = {
     enable = true;
-    packages = [ pkgs.apparmor-profiles ]; 
+    packages = [ pkgs.apparmor-profiles ];
   };
 
   # Open ports in the firewall.
@@ -316,17 +328,17 @@
         enable = true;
         enableOffloadCmd = true;
       };
-      amdgpuBusId = "PCI:4:0:0"; 
+      amdgpuBusId = "PCI:4:0:0";
       nvidiaBusId = "PCI:1:0:0";
     };
   };
 
   systemd.services.battery-charge-threshold = {
     description = "Set Battery Charge Maximum Limit";
-    
+
     after = [ "multi-user.target" ];
     wantedBy = [ "multi-user.target" ];
-    
+
     startLimitBurst = 0;
     serviceConfig = {
       Type = "oneshot";
@@ -339,7 +351,7 @@
 
   # Home Manager config
   home-manager = {
-    backupFileExtension = "backup"; 
+    backupFileExtension = "backup";
     users.suyog = import ./home.nix;
   };
 }

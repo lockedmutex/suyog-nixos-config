@@ -19,10 +19,18 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nur, ... }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nixpkgs-unstable,
+      home-manager,
+      nur,
+      ...
+    }@inputs:
     let
       system = "x86_64-linux";
-      
+
       # Configure Unstable Packages to be passed as an argument
       unstable-pkgs = import nixpkgs-unstable {
         inherit system;
@@ -32,7 +40,7 @@
     {
       nixosConfigurations.AsusVivobook = nixpkgs.lib.nixosSystem {
         inherit system;
-        
+
         # Pass inputs and special variables to all modules
         specialArgs = {
           inherit inputs unstable-pkgs;
@@ -41,7 +49,7 @@
         modules = [
           # Main Configuration
           ./configuration.nix
-          
+
           # Home Manager Module
           home-manager.nixosModules.default
 

@@ -3,7 +3,7 @@
 let
   catppuccin-wallpaper = pkgs.fetchurl {
     url = "https://raw.githubusercontent.com/NixOS/nixos-artwork/master/wallpapers/nixos-wallpaper-catppuccin-mocha.png";
-    sha256 = "sha256-fmKFYw2gYAYFjOv4lr8IkXPtZfE1+88yKQ4vjEcax1s="; 
+    sha256 = "sha256-fmKFYw2gYAYFjOv4lr8IkXPtZfE1+88yKQ4vjEcax1s=";
     name = "catppuccin-mocha.png";
   };
   purple-haze-wallpaper = pkgs.fetchurl {
@@ -11,7 +11,7 @@ let
     sha256 = "";
     name = "purple-haze.jpg";
   };
-    purple-gloss-wallpaper = pkgs.fetchurl {
+  purple-gloss-wallpaper = pkgs.fetchurl {
     url = "https://images.unsplash.com/photo-1672009190560-12e7bade8d09?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&dl=pawel-czerwinski-1A_dO4TFKgM-unsplash.jpg";
     sha256 = "sha256-oYCYGI6wD02ykdD6RVad+8WA386RaH+LuEFyYu3iSps=";
     name = "purple-gloss.jpg";
@@ -31,10 +31,10 @@ in
     history = {
       size = 30000;
       save = 10000;
-      path = "${config.home.homeDirectory}/.histfile"; 
+      path = "${config.home.homeDirectory}/.histfile";
     };
     defaultKeymap = "viins";
-    initContent= ''
+    initContent = ''
       setopt extendedglob
     '';
 
@@ -45,7 +45,7 @@ in
       optimise = "sudo nix-store --optimise";
       update-lock = "nix flake update --flake /home/suyog/nixos-config";
     };
-    
+
     # Example: Oh My Zsh (optional)
     # oh-my-zsh = {
     #   enable = true;
@@ -62,7 +62,7 @@ in
         email = "git@suyogtandel.in";
         signingkey = "/home/suyog/.ssh/git-commit-signing-key";
       };
-      
+
       gpg.format = "ssh";
       commit.gpgsign = true;
       tag.gpgsign = true;
@@ -89,5 +89,5 @@ in
   };
 
   programs.home-manager.enable = true;
-  home.stateVersion = "25.11"; 
+  home.stateVersion = "25.11";
 }
