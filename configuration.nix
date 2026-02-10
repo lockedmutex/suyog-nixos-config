@@ -3,7 +3,6 @@
   pkgs,
   lib,
   inputs,
-  unstable-pkgs,
   ...
 }:
 
@@ -45,7 +44,7 @@
   systemd.services.systemd-udev-settle.enable = false;
 
   # Use latest kernel.
-  boot.kernelPackages = unstable-pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # LTS Fallback kernel.
   specialisation = {
@@ -189,8 +188,8 @@
       inkscape-with-extensions
       pods
       distrobox
-      unstable-pkgs.zed-editor-fhs
-      unstable-pkgs.antigravity-fhs
+      zed-editor-fhs
+      antigravity-fhs
       keepassxc
       yubioath-flutter
       clapper
@@ -208,9 +207,9 @@
       pkgs.nur.repos.Ev357.helium
 
       # language servers for zed:
-      unstable-pkgs.nixd
-      unstable-pkgs.nil
-      unstable-pkgs.nixfmt-rfc-style
+      nixd
+      nil
+      nixfmt-rfc-style
     ];
   };
 

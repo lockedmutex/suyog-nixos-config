@@ -3,12 +3,11 @@
 
   inputs = {
     # 1. Official NixOS Package Sources
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    # 2. Home Manager (Matched to 25.11)
+    # 2. Home Manager
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -23,19 +22,12 @@
     {
       self,
       nixpkgs,
-      nixpkgs-unstable,
       home-manager,
       nur,
       ...
     }@inputs:
     let
       system = "x86_64-linux";
-
-      # Configure Unstable Packages to be passed as an argument
-      unstable-pkgs = import nixpkgs-unstable {
-        inherit system;
-        config.allowUnfree = true;
-      };
     in
     {
       nixosConfigurations.AsusVivobook = nixpkgs.lib.nixosSystem {
@@ -43,7 +35,7 @@
 
         # Pass inputs and special variables to all modules
         specialArgs = {
-          inherit inputs unstable-pkgs;
+          inherit inputs;
         };
 
         modules = [
