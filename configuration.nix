@@ -198,6 +198,7 @@
       # language servers for zed:
       unstable-pkgs.nixd
       unstable-pkgs.nil
+      unstable-pkgs.nixfmt-rfc-style
     ];
   };
 
